@@ -10,9 +10,14 @@ end
 
 -- json数组解开为多条日志
 local raw_arr = json.decode(raw_msg)
+
+-- 获取时间
+local timestamp = os.date("%Y%m%d%H", os.time())
+
 local log_arr = {} -- 拆分后的json行数组
 for idx, log_item in pairs(raw_arr) do 
     log_item.ip = ngx.var.remote_addr
+    log_item.timestamp = timestamp
     local log_item_str = json.encode(log_item)
     table.insert(log_arr, log_item_str)
 end
