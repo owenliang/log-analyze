@@ -10,10 +10,10 @@ end
 
 function _M.rotate_file()
     local now = os.time()
-    local nex_idx = math.floor(now / 3600)
+    local new_idx = math.floor(now / 3600)
 
     -- 判断是否需要轮转文件
-    if file and nex_idx == file_idx then
+    if file and new_idx == file_idx then
         return 
     end
 
@@ -25,7 +25,7 @@ function _M.rotate_file()
     end
 
     -- 关闭新文件
-    if file then 
+    if file then
         file:close()
     end
 

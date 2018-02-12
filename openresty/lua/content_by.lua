@@ -19,4 +19,3 @@ end
 
 -- 结束应答, 在log_by_lua_file阶段输出日志
 ngx.ctx.log_arr = log_arr
-ngx.ctx.counter = 1
