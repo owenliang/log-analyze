@@ -44,7 +44,13 @@ function _M.write(msg)
     end
 
     file:write(msg .. '\n')
-    file:flush()
+end
+
+-- 主动flush
+function _M.flush()
+    if file then
+        file:flush()
+    end
 end
 
 return _M

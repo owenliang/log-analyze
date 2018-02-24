@@ -4,3 +4,6 @@ local log = require("log")
 for _, log_item in ipairs(ngx.ctx.log_arr) do 
     log.write(log_item)
 end
+
+-- 批量刷出到磁盘
+log.flush()
