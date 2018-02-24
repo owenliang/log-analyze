@@ -1,6 +1,6 @@
 local log = require("log") -- 自定义log库
 local json = require("cjson") -- json库
-local ck = require("cookie") -- cookie库
+local ck = require("resty.cookie") -- cookie库
 
 -- 读取body
 local raw_msg = ngx.req.get_body_data()
