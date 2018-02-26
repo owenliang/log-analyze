@@ -2,12 +2,14 @@ local log = require("log") -- 自定义log库
 local json = require("cjson") -- json库
 local ck = require("resty.cookie") -- cookie库
 
--- 读取body
-local raw_msg = ngx.req.get_body_data()
-if not raw_msg or string.len(raw_msg) == 0 then -- 上报内容为空, 直接返回
+-- 读取日志list
+local post_args = ngx.req.get_post_args()
+if not post_args or not post_args["list"] then -- 上报内容为空, 直接返回
     ngx.exit(ngx.HTTP_OK) 
     return
 end
+
+local raw_list = post_args["list"]
 
 -- 解析cookie
 local cookie, err = ck:new()
@@ -27,7 +29,7 @@ for cname, cvalue in pairs(all_cookies) do
 end
 
 -- json数组解开为多条日志
-local raw_arr = json.decode(raw_msg)
+local raw_arr = json.decode(raw_list)
 
 -- 重组日志
 local log_arr = {} -- 拆分后的json行数组
