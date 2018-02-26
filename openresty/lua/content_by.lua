@@ -43,5 +43,10 @@ for idx, log_item in pairs(raw_arr) do
     table.insert(log_arr, log_item_str)
 end
 
--- 结束应答, 在log_by_lua_file阶段输出日志
+-- 保存日志到上下文, 在log_by_lua_file阶段输出日志
 ngx.ctx.log_arr = log_arr
+
+-- 回复应答
+local response = {error_code = 0, error_msg = "success", data = {}}
+response = json.encode(response)
+ngx.say(response)
